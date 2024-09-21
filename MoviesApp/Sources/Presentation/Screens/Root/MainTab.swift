@@ -51,7 +51,7 @@ enum MainTab: Int, Identifiable, Hashable, CaseIterable {
         case .watchList:
             Text("watch liset")
         case .settings:
-            Text("settings")
+            SettingsView()
         }
     }
 }

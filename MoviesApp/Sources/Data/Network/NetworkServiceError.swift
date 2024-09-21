@@ -14,6 +14,7 @@ enum NetworkServiceError: LocalizedError {
     case decoding
     case network(NetworkError)
     case unknown
+    case other(String)
 
     var errorDescription: String? {
         switch self {
@@ -29,6 +30,8 @@ enum NetworkServiceError: LocalizedError {
             return "Network Error (\(networkError.errorDescription ?? "?"))"
         case .unknown:
             return "Unknown service error"
+        case let .other(msg):
+            return msg
         }
     }
 }

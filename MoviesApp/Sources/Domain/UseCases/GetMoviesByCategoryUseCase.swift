@@ -14,7 +14,7 @@ struct GetMoviesByCategoryUseCase {
         self.repository = repository
     }
 
-    func execute(category: MovieCategory, page: Int) -> AnyPublisher<[Movie], NetworkServiceError> {
+    func execute(category: MovieCategory, page: Int) -> AnyPublisher<[HomeMovie], NetworkServiceError> {
         let endpoint: MoviesEndpoint
         switch category {
         case .popular:
@@ -30,7 +30,7 @@ struct GetMoviesByCategoryUseCase {
         return repository
             .getMovies(endpoint: endpoint)
             .compactMap(\.results)
-            .map { $0.map { $0.toMovie() }}
+            .map { $0.map { HomeMovie(movie: $0.toMovie()) }}
             .eraseToAnyPublisher()
     }
 }

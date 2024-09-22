@@ -340,6 +340,16 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		A776AE4D2CA09F0A00D03CD0 /* MovieCellHorizontal */ = {
+			isa = PBXGroup;
+			children = (
+				A776ADDB2C9FC22A00D03CD0 /* MovieCellHorizontal.swift */,
+				A776AE492CA0985D00D03CD0 /* MovieCellHorizontalStyle.swift */,
+				A776AE4B2CA098FB00D03CD0 /* MovieCellHorizontalComponent.swift */,
+			);
+			path = MovieCellHorizontal;
+			sourceTree = "<group>";
+		};
 		A7DBABC52C9E62580021CFD9 = {
 			isa = PBXGroup;
 			children = (
@@ -606,16 +616,14 @@
 		A7DBAC372C9EA9660021CFD9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A776AE4D2CA09F0A00D03CD0 /* MovieCellHorizontal */,
 				A776AE1A2CA0428600D03CD0 /* CloseButton.swift */,
 				A7DBAC382C9EA9730021CFD9 /* SafeButton.swift */,
-				A776ADDB2C9FC22A00D03CD0 /* MovieCellHorizontal.swift */,
 				A776ADDD2C9FD6FE00D03CD0 /* TakeOverView.swift */,
 				A776ADDF2C9FD84400D03CD0 /* TakeOverViewStyle.swift */,
 				A776ADF22C9FEAFF00D03CD0 /* ReusableProgressView.swift */,
 				A776AE102CA03AB900D03CD0 /* WebViewSwiftUI.swift */,
 				A776AE472CA0955400D03CD0 /* VisualEffectView.swift */,
-				A776AE492CA0985D00D03CD0 /* MovieCellHorizontalStyle.swift */,
-				A776AE4B2CA098FB00D03CD0 /* MovieCellHorizontalComponent.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

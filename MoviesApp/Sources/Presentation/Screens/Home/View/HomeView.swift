@@ -20,7 +20,7 @@ struct HomeView: View {
                 .searchable(
                     text: $viewModel.input,
                     placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: Text("Search from 4 categories")
+                    prompt: Text("Search across 4 categories")
                 )
                 .animation(.default, value: viewModel.isSearching)
         }

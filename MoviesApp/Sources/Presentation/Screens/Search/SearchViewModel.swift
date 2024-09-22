@@ -38,8 +38,14 @@ private extension SearchViewModel {
             .sink { [weak self] (_) in
                 guard let self, self.status != .searching else { return }
                 self.status = .searching
-                self.showCacheFilteredMovies()
                 self.searchMovies()
+            }
+            .store(in: &cancellables)
+        
+        $input
+            .removeDuplicates()
+            .sink { [weak self] (_) in
+                self?.showCacheFilteredMovies()
             }
             .store(in: &cancellables)
     }

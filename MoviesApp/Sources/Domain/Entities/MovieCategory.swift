@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum MovieCategory: Int, Identifiable, Hashable, Equatable {
-    case popular = 0
+enum MovieCategory: String, Identifiable, Hashable, Equatable, Codable {
+    case popular
     case nowPlaying
     case upcoming
     case topRated
 
-    var id: Int { self.rawValue }
+    var id: String { self.rawValue }
 
     var title: String {
         switch self {

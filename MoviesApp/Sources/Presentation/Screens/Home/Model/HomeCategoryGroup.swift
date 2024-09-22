@@ -8,7 +8,7 @@
 import Foundation
 
 struct HomeCategoryGroup: Identifiable, Hashable {
-    var id: Int { category.id }
+    var id: String { category.id }
     var status: HomeCategoryStatus
     var category: MovieCategory
     var movies: [HomeMovie]

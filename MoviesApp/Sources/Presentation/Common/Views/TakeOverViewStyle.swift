@@ -25,7 +25,7 @@ enum TakeOverViewStyle {
         case let .empty(type):
             return type.title
         case .start:
-            return "Search through over 10,000 movies from TheMovieDB!"
+            return "Search through over 100,000 movies from TheMovieDB!"
         }
     }
 

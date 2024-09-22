@@ -42,7 +42,7 @@ private extension SearchView {
                 ForEach(viewModel.movies) { (movie) in
                     VStack {
                         NavigationLink(value: movie) {
-                            MovieCellHorizontal(movie: movie)
+                            MovieCellHorizontal(style: .simple, movie: movie)
                                 .addChevron()
                                 .padding(.vertical)
                         }

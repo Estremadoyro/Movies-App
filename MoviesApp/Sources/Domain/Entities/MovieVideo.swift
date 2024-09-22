@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieVideo: Identifiable, Hashable {
+struct MovieVideo: Identifiable, Hashable, Codable {
     let id: String
     var youtubeKey: String?
 

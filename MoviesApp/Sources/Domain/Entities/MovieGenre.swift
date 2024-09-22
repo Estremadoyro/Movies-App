@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieGenre: Identifiable, Hashable {
+struct MovieGenre: Identifiable, Hashable, Codable {
     let id: String
     var name: String
     

@@ -12,18 +12,26 @@ struct MovieDetailViewBuilder {
         @LocalStorage(\.debugMode) var debugMode: Bool?
         let useMock: Bool = mock ? mock : debugMode ?? mock
 
-        let moviesRepository: MoviesRemoteRepositoryProtocol = useMock
+        let moviesRemoteRepository: MoviesRemoteRepositoryProtocol = useMock
             ? MoviesRemoteRepositoryMock()
             : MoviesRemoteRepository()
 
-        var movieWithDefaultValues = movie
-        movieWithDefaultValues.setDefaultValues()
+        let moviesLocalRepository: MoviesLocalRepositoryProtocol = useMock
+            ? MoviesLocalRepositoryMock()
+            : MoviesLocalRepository()
 
-        let getMovieDetailByIdUseCase = GetMovieDetailByIdUseCase(repository: moviesRepository)
+        let getMovieDetailByIdUseCase = GetMovieDetailByIdUseCase(repository: moviesRemoteRepository)
+        let removeMovieFromWatchListUseCase = RemoveMovieFromWatchListUseCase(repository: moviesLocalRepository)
+        let addMovieToWatchListUseCase = AddMovieToWatchListUseCase(repository: moviesLocalRepository)
+        let getMovieInWatchListUseCase = GetMovieInWatchListUseCase(repository: moviesLocalRepository)
+
         return MovieDetailView(
             viewModel: MovieDetailViewModel(
-                movie: movieWithDefaultValues,
-                getMovieDetailByIdUseCase: getMovieDetailByIdUseCase
+                movie: movie,
+                getMovieDetailByIdUseCase: getMovieDetailByIdUseCase,
+                removeMovieFromWatchListUseCase: removeMovieFromWatchListUseCase,
+                addMovieToWatchListUseCase: addMovieToWatchListUseCase,
+                getMovieInWatchListUseCase: getMovieInWatchListUseCase
             )
         )
     }

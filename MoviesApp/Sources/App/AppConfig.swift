@@ -8,7 +8,5 @@
 import Foundation
 
 enum AppConfig {
-    static var appGroupName: String { "group.dev.leoestremadoyro.MoviesApp" }
     static var coreDataName: String { "MoviesApp" }
-    static var imageDirName: String { "Images" }
 }

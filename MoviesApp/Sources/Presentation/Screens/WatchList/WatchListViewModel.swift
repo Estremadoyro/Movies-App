@@ -9,16 +9,18 @@ import SwiftUI
 
 final class WatchListViewModel: ObservableObject {
     @Published var movies: [Movie] = []
-    
+    @Published var isEmpty: Bool = false
+
     private let getWatchListMoviesUseCase: GetWatchListMoviesUseCase
-    
+
     init(getWatchListMoviesUseCase: GetWatchListMoviesUseCase) {
         self.getWatchListMoviesUseCase = getWatchListMoviesUseCase
     }
-    
-    var isEmpty: Bool { movies.isEmpty }
-    
-    func onAppear() {
-        movies = getWatchListMoviesUseCase.execute()
+
+    func syncMovies() {
+        self.movies = getWatchListMoviesUseCase.execute()
+        withAnimation {
+            isEmpty = self.movies.isEmpty
+        }
     }
 }

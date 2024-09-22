@@ -17,8 +17,11 @@ struct WatchListViewBuilder {
             : MoviesLocalRepository()
 
         let getWatchListMoviesUseCase = GetWatchListMoviesUseCase(repository: moviesRepository)
+        
         return WatchListView(
-            viewModel: WatchListViewModel(getWatchListMoviesUseCase: getWatchListMoviesUseCase)
+            viewModel: WatchListViewModel(
+                getWatchListMoviesUseCase: getWatchListMoviesUseCase
+            )
         )
     }
 }

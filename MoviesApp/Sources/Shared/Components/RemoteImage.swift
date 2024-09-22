@@ -40,8 +40,8 @@ struct RemoteImage: View {
                 return AnyView(
                     image
                         .resizable()
-                        .frame(width: config.size.width, height: config.size.height)
                         .aspectRatio(contentMode: .fill)
+                        .frame(width: config.size.width, height: config.size.height)
                         .clipped()
                 )
             case let .custom(receivedImage):
@@ -99,7 +99,7 @@ struct RemoteImage: View {
 
 #Preview {
     RemoteImage(
-        url: URL(string: "XD https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"),
+        url: URL(string: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"),
         config: .default,
         imageAspect: .aspectFill
     )

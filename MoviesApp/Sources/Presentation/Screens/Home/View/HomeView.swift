@@ -49,7 +49,7 @@ private extension HomeView {
                 LazyVStack {
                     ForEach(viewModel.visibleMovies) { (homeMovie) in
                         NavigationLink(value: homeMovie) {
-                            MovieCellHorizontal(movie: homeMovie.movie)
+                            MovieCellHorizontal(style: .simple, movie: homeMovie.movie)
                                 .addChevron()
                                 .padding(.vertical)
                         }

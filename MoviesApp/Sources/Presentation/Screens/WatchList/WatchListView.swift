@@ -17,29 +17,33 @@ struct WatchListView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Movie.self) { (movie) in
                     MovieDetailViewBuilder.build(movie: movie)
+                        .onDisappear {
+                            viewModel.syncMovies()
+                        }
                 }
         }
         .overlay(viewModel.isEmpty ? TakeOverView(style: .empty(.watchList)) : nil)
+        .animation(.default, value: viewModel.movies)
+        .transition(.opacity)
         .onAppear {
-            viewModel.onAppear()
+            viewModel.syncMovies()
         }
     }
 
     func makeContentView() -> some View {
         ScrollView(.vertical) {
-            VStack {
-                ForEach(viewModel.movies) { (movie) in
-                    VStack {
-                        NavigationLink(value: movie) {
-                            MovieCellHorizontal(movie: movie)
-                                .padding(.vertical)
-                                .foregroundStyle(.foreground)
-                        }
-                        .addChevron()
-                        Divider()
+            ForEach(viewModel.movies) { (movie) in
+                VStack {
+                    NavigationLink(value: movie) {
+                        MovieCellHorizontal(style: .detailed, movie: movie)
+                            .padding(.vertical)
+                            .foregroundStyle(.foreground)
                     }
+                    .addChevron()
+                    Divider()
                 }
             }
+            .padding(.horizontal)
         }
     }
 }

@@ -11,4 +11,16 @@ struct MoviesLocalRepositoryMock: MoviesLocalRepositoryProtocol {
     func getWatchList() -> [Movie] {
         return [.sample, .sample]
     }
+
+    func addMovieToWatchList(movie: Movie) {
+        // mock
+    }
+
+    func removeMovieFromWatchList(movie: Movie) {
+        // mock
+    }
+
+    func getMovieInWatchList(movieId: String) -> Movie? {
+        return .sampleDetail
+    }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDMovie" representedClassName="CDMovie" syncable="YES">
+        <attribute name="backdropPath" optional="YES" attributeType="String"/>
+        <attribute name="genres" optional="YES" attributeType="Binary"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
+        <attribute name="releaseDateStr" optional="YES" attributeType="String"/>
+        <attribute name="runtime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="saveDate" attributeType="Date" defaultDateTimeInterval="748717140" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString="NO TITLE"/>
+        <attribute name="uniqueId" attributeType="String" defaultValueString=""/>
+        <attribute name="video" optional="YES" attributeType="Binary"/>
+        <attribute name="voteAverage" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+</model>

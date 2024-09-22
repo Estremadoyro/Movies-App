@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MovieCellHorizontal: View {
+    var style: MovieCellHorizontalStyle
     var movie: Movie
 
     private var imgSize: CGSize {
@@ -27,34 +28,13 @@ struct MovieCellHorizontal: View {
             makeImageView()
                 .frame(width: imgSize.width, height: imgSize.height)
                 .addCornerRadius(radius: 16)
-            VStack(alignment: .leading, spacing: .zero) {
-                if let title = movie.title {
-                    Text(title)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(2)
-                        .font(.title3)
-                        .bold()
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Spacer()
-                VStack(alignment: .leading, spacing: 8) {
-                    if let voteAverage = movie.voteAverage {
-                        HStack(spacing: 4) {
-                            Image.star
-                                .renderingMode(.template)
-                            Text(String(format: "%0.1f", voteAverage))
-                        }
-                        .foregroundStyle(.orange)
-                        .bold()
-                    }
-                    if let releaseDate = movie.dateYearOnly {
-                        HStack(spacing: 4) {
-                            Image.calendar
-                                .resizable()
-                                .renderingMode(.template)
-                                .frame(width: 20, height: 20)
-                            Text(releaseDate)
-                        }
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(style.components, id: \.rawValue) { (component) in
+                    if component == .title {
+                        component.makeItem(movie: movie, style: style)
+                        Spacer()
+                    } else {
+                        component.makeItem(movie: movie, style: style)
                     }
                 }
             }
@@ -78,6 +58,6 @@ struct MovieCellHorizontal: View {
 }
 
 #Preview {
-    MovieCellHorizontal(movie: .sample)
+    MovieCellHorizontal(style: .simple, movie: .sampleDetail)
         .padding(.horizontal)
 }

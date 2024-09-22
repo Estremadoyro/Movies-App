@@ -14,9 +14,9 @@ struct MovieDetailView: View {
         makeContentView()
             .navigationTitle("Detail")
             .navigationBarTitleDisplayMode(.inline)
-            .addToolBarItem(placement: .topBarTrailing, view: makeWatchListView, action: viewModel.didChangeWatchListStatus())
-            .onFirstAppear {
-                viewModel.onFirstAppear()
+            .addToolBarItem(placement: .topBarTrailing, view: makeWatchListView, action: viewModel.changeWatchListStatus())
+            .onAppear {
+                viewModel.onAppear()
             }
             .sheet(isPresented: $viewModel.showSheet) {
                 viewModel.destination.makeView()
@@ -56,6 +56,14 @@ private extension MovieDetailView {
                 if let youtubeURL = viewModel.movie.youtubeURL {
                     makeTrailerPlayButton(url: youtubeURL)
                 }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        makeScoreLabel()
+                    }
+                }
+                .padding(16)
             } else {
                 RemoteImage.makeImageErrorView()
                     .addCornerRadius(topLeft: 0, bottomLeft: 16, bottomRight: 16, topRight: 0)
@@ -81,6 +89,22 @@ private extension MovieDetailView {
         }
         .buttonStyle(.plain)
     }
+
+    @ViewBuilder
+    func makeScoreLabel() -> some View {
+        if let score = viewModel.movie.scoreParsed {
+            HStack(spacing: 4) {
+                Image.star
+                    .renderingMode(.template)
+                Text(score)
+            }
+            .foregroundStyle(.orange)
+            .bold()
+            .padding(8)
+            .background(VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark)))
+            .addCornerRadius(radius: 8)
+        }
+    }
 }
 
 // MARK: - Information
@@ -95,7 +119,7 @@ private extension MovieDetailView {
     }
 
     func makeTitleWithImage() -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             makeTitleImageView()
             VStack {
                 Spacer()
@@ -125,6 +149,7 @@ private extension MovieDetailView {
             RemoteImage(url: url, config: .init(size: imageSize), imageAspect: .aspectFill)
                 .frame(width: imageSize.width, height: imageSize.height)
                 .addCornerRadius(radius: 16)
+                .shadow(color: .black, radius: 4)
         }
     }
 

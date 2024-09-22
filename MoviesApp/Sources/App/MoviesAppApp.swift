@@ -14,4 +14,8 @@ struct MoviesAppApp: App {
             ContentView()
         }
     }
+    
+    init() {
+        let _ = CoreDataManager.shared
+    }
 }

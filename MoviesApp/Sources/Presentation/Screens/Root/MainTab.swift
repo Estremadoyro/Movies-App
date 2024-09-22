@@ -49,7 +49,7 @@ enum MainTab: Int, Identifiable, Hashable, CaseIterable {
         case .search:
             SearchViewBuilder.build()
         case .watchList:
-            Text("watch liset")
+            WatchListViewBuilder.build()
         case .settings:
             SettingsView()
         }

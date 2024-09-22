@@ -1,0 +1,20 @@
+//
+//  GetWatchListMoviesUseCase.swift
+//  MoviesApp
+//
+//  Created by Leonardo on 9/22/24.
+//
+
+import Foundation
+
+struct GetWatchListMoviesUseCase {
+    private let repository: MoviesLocalRepositoryProtocol
+
+    init(repository: MoviesLocalRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    func execute() -> [Movie] {
+        repository.getWatchList()
+    }
+}

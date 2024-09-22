@@ -13,7 +13,7 @@ struct TakeOverView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            Image.noResults
+            style.icon
                 .resizable()
                 .frame(width: 80, height: 80)
             Text(style.title)

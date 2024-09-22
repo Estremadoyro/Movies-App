@@ -23,6 +23,9 @@ struct HomeView: View {
                     prompt: Text("Search across 4 categories")
                 )
                 .animation(.default, value: viewModel.isSearching)
+                .navigationDestination(for: HomeMovie.self) { (homeMovie) in
+                    MovieDetailViewBuilder.build(movie: homeMovie.movie)
+                }
         }
     }
 }
@@ -45,8 +48,12 @@ private extension HomeView {
             ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(viewModel.visibleMovies) { (homeMovie) in
-                        MovieCellSearch(movie: homeMovie.movie)
-                            .padding(.vertical)
+                        NavigationLink(value: homeMovie) {
+                            MovieCellHorizontal(movie: homeMovie.movie)
+                                .addChevron()
+                                .padding(.vertical)
+                        }
+                        .foregroundStyle(.foreground)
                         Divider()
                     }
                 }
@@ -79,12 +86,15 @@ private extension HomeView {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(Array(categoryGroup.movies.enumerated()), id: \.element) { (i, homeMovie) in
-                        switch section.type {
-                        case .principal:
-                            HomeMovieCellPrincipal(position: i + 1, homeMovie: homeMovie)
-                        case .secondary:
-                            HomeMovieCellSecondary(homeMovie: homeMovie)
+                        NavigationLink(value: homeMovie) {
+                            switch section.type {
+                            case .principal:
+                                HomeMovieCellPrincipal(position: i + 1, homeMovie: homeMovie)
+                            case .secondary:
+                                HomeMovieCellSecondary(homeMovie: homeMovie)
+                            }
                         }
+                        .disabled(homeMovie.isPlaceholder)
                     }
                 }
                 .padding(.horizontal)

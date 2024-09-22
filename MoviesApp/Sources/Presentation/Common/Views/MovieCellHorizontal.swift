@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MovieCellSearch: View {
+struct MovieCellHorizontal: View {
     var movie: Movie
 
     private var imgSize: CGSize {
@@ -30,6 +30,7 @@ struct MovieCellSearch: View {
             VStack(alignment: .leading, spacing: .zero) {
                 if let title = movie.title {
                     Text(title)
+                        .multilineTextAlignment(.leading)
                         .lineLimit(2)
                         .font(.title3)
                         .bold()
@@ -77,6 +78,6 @@ struct MovieCellSearch: View {
 }
 
 #Preview {
-    MovieCellSearch(movie: .sample)
+    MovieCellHorizontal(movie: .sample)
         .padding(.horizontal)
 }

@@ -16,4 +16,16 @@ extension Image {
     static let calendar = Image(.calendar)
     static let noResults = Image(.noResults)
     static let photo = Image(systemName: "photo")
+    static let clock = Image(systemName: "clock")
+    static let ticket = Image(systemName: "ticket")
+    static let playFill = Image(systemName: "play.fill")
+    static var chevronRight: some View {
+        Image(systemName: "chevron.right")
+            .renderingMode(.template)
+            .foregroundStyle(.gray)
+    }
+
+    // Fill
+    static let bookmarkFill = Image(systemName: "bookmark.fill")
+    static let xMarkCircleFill = Image(systemName: "xmark.circle.fill")
 }

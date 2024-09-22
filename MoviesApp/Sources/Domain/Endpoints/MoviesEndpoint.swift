@@ -13,6 +13,7 @@ enum MoviesEndpoint: EndpointType {
     case getUpcoming(page: Int)
     case getTopRated(page: Int)
     case search(query: String)
+    case getDetail(movieId: Int)
     
     var host: String { "https://api.themoviedb.org/3" }
     
@@ -34,6 +35,8 @@ enum MoviesEndpoint: EndpointType {
             return "/movie/top_rated"
         case .search:
             return "/search/movie"
+        case let .getDetail(movieId):
+            return "/movie/\(movieId)"
         }
     }
     
@@ -46,6 +49,8 @@ enum MoviesEndpoint: EndpointType {
             return ["page": "\(page)"]
         case let .search(query):
             return ["query": query]
+        case .getDetail:
+            return ["append_to_response": "videos"]
         }
     }
 }

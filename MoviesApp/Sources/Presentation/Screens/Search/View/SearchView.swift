@@ -20,6 +20,9 @@ struct SearchView: View {
                     placement: .navigationBarDrawer(displayMode: .always),
                     prompt: Text("Search movies across TheMovieDB")
                 )
+                .navigationDestination(for: Movie.self) { (movie) in
+                    MovieDetailViewBuilder.build(movie: movie)
+                }
         }
         .onFirstAppear {
             viewModel.onFirstAppear()
@@ -38,9 +41,12 @@ private extension SearchView {
             LazyVStack {
                 ForEach(viewModel.movies) { (movie) in
                     VStack {
-                        MovieCellSearch(movie: movie)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical)
+                        NavigationLink(value: movie) {
+                            MovieCellHorizontal(movie: movie)
+                                .addChevron()
+                                .padding(.vertical)
+                        }
+                        .foregroundStyle(.foreground)
                         Divider()
                     }
                 }
@@ -62,7 +68,7 @@ private extension SearchView {
         case .searching:
             ReusableProgressView()
                 .controlSize(.large)
-                .foregroundStyle(.gray)
+                .tint(.gray)
                 .padding()
                 .background(.gray.opacity(0.6))
                 .addCornerRadius(radius: 8)

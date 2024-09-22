@@ -18,5 +18,14 @@ extension View {
         )
     }
     
+    func addCornerRadius(topLeft: Double, bottomLeft: Double, bottomRight: Double, topRight: Double) -> some View {
+        self.clipShape(
+            .rect(topLeadingRadius: topLeft,
+                  bottomLeadingRadius: bottomLeft,
+                  bottomTrailingRadius: bottomRight,
+                  topTrailingRadius: topRight)
+        )
+    }
+    
     var screenSize: CGSize { UIScreen.main.bounds.size }
 }

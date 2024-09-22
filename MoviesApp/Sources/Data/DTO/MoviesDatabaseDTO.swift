@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoviesDatabaseDTO: Decodable {
-    var page: Int
-    var results: [MovieDatabaseDTO]?
+struct MoviesDatabaseDTO<T: Decodable>: Decodable {
+    var page: Int?
+    var results: [T]?
 }

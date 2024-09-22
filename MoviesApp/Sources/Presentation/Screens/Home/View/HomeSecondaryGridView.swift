@@ -20,7 +20,10 @@ struct HomeSecondaryGridView: View {
             ForEach(categoryGroups) { (movieGroup) in
                 LazyVGrid(columns: columns, spacing: interRowSpacing) {
                     ForEach(movieGroup.movies) { (homeMovie) in
-                        HomeMovieCellSecondary(homeMovie: homeMovie)
+                        NavigationLink(value: homeMovie) {
+                            HomeMovieCellSecondary(homeMovie: homeMovie)
+                        }
+                        .disabled(homeMovie.isPlaceholder)
                     }
                 }
                 .tag(movieGroup.category)

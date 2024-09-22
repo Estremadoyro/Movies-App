@@ -20,17 +20,23 @@ struct GetMoviesByCategoryUseCase {
         case .popular:
             endpoint = .getPopular(page: page)
         case .nowPlaying:
-            endpoint = .getPopular(page: page)
+            endpoint = .getNowPlaying(page: page)
         case .upcoming:
-            endpoint = .getPopular(page: page)
+            endpoint = .getUpcoming(page: page)
         case .topRated:
-            endpoint = .getPopular(page: page)
+            endpoint = .getTopRated(page: page)
         }
 
         return repository
             .getMovies(endpoint: endpoint)
             .compactMap(\.results)
-            .map { $0.map { HomeMovie(movie: $0.toMovie()) }}
+            .map { (results) in
+                if category == .popular {
+                    return results.map { HomeMovie(movie: $0.toMovie()) }
+                } else {
+                    return Array(results.prefix(6)).map { HomeMovie(movie: $0.toMovie()) }
+                }
+            }
             .eraseToAnyPublisher()
     }
 }

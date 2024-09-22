@@ -12,25 +12,50 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            makeContentView()
+            makeMainView()
+                .blur(radius: viewModel.isSearching ? 6 : .zero)
+                .overlay(viewModel.isSearching ? makeSearchView() : nil)
                 .navigationTitle("What do you want to watch?")
                 .navigationBarTitleDisplayMode(.inline)
                 .searchable(
-                    text: .constant(.empty),
-                    placement: .navigationBarDrawer(displayMode: .always)
+                    text: $viewModel.input,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: Text("Search from 4 categories")
                 )
+                .animation(.default, value: viewModel.isSearching)
         }
     }
 }
 
 // MARK: - Content
 private extension HomeView {
-    func makeContentView() -> some View {
+    func makeMainView() -> some View {
         ScrollView(.vertical) {
-            LazyVStack {
+            LazyVStack(spacing: 40) {
                 ForEach(viewModel.sections, content: makeSections)
             }
         }
+    }
+
+    func makeSearchView() -> some View {
+        ZStack {
+            Color.dynamicWhite
+                .opacity(0.7)
+                .ignoresSafeArea()
+            ScrollView(.vertical) {
+                LazyVStack {
+                    ForEach(viewModel.visibleMovies) { (homeMovie) in
+                        MovieCellSearch(movie: homeMovie.movie)
+                            .padding(.vertical)
+                        Divider()
+                    }
+                }
+                .padding()
+            }
+        }
+        .frame(width: screenSize.width)
+        .overlay(viewModel.visibleMovies.isEmpty ? NoResultsView(style: .homeFilter) : nil)
+        .animation(.default, value: viewModel.visibleMovies.map(\.id))
     }
 }
 
@@ -74,8 +99,27 @@ private extension HomeView {
 
 // MARK: - Section (Secondary)
 private extension HomeView {
+    @ViewBuilder
     func makeSectionSecondary(section: HomeSection) -> some View {
-        Text("seciton secondary")
+        VStack(spacing: 12) {
+            HomeCategoriesHeaderView(
+                selectedCategory: $viewModel.selectedSecondaryCategory,
+                categories: section.movieGroups.map(\.category)
+            )
+            .padding(.horizontal)
+
+            HomeSecondaryGridView(
+                selectedCategory: $viewModel.selectedSecondaryCategory,
+                categoryGroups: section.movieGroups
+            ) { (homeCategory) in
+                viewModel.loadMovies(homeSection: section, homeCategory: homeCategory)
+            }
+            .frame(height: 360)
+        }
+        .animation(.default, value: viewModel.selectedSecondaryCategory)
+        .onChange(of: viewModel.selectedSecondaryCategory) { _ in
+            HapticManager.runSelection()
+        }
     }
 }
 

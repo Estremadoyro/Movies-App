@@ -27,6 +27,12 @@ struct MoviesRemoteRepositoryMock: MoviesRemoteRepositoryProtocol {
         switch endpoint {
         case .getPopular:
             return "movies-popular"
+        case .getNowPlaying:
+            return "movies-now-playing"
+        case .getUpcoming:
+            return "movies-upcoming"
+        case .getTopRated:
+            return "movies-top-rated"
         }
     }
 }

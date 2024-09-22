@@ -14,17 +14,24 @@ struct HomeMovie: Identifiable, Hashable {
 
     static var placeholder: HomeMovie {
         HomeMovie(
-            movie: Movie(id: UUID().uuidString, title: "placeholder"),
+            movie: Movie(
+                id: UUID().uuidString,
+                title: "placeholder",
+                voteAverage: 0,
+                releaseDate: nil
+            ),
             isPlaceholder: true
         )
     }
-    
+
     static var sample: HomeMovie {
         HomeMovie(
             movie: Movie(
-                id: UUID().uuidString, 
+                id: UUID().uuidString,
                 title: "Deadpool & Wolverine",
-                posterPath: "/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+                posterPath: "/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+                voteAverage: 8,
+                releaseDate: "2020-03-22"
             )
         )
     }

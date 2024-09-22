@@ -17,4 +17,6 @@ extension View {
                   topTrailingRadius: radius)
         )
     }
+    
+    var screenSize: CGSize { UIScreen.main.bounds.size }
 }

@@ -8,17 +8,24 @@
 import Foundation
 
 struct HomeCategoryGroup: Identifiable, Hashable {
-    var id: String
+    var id: Int { category.id }
     var status: HomeCategoryStatus
     var category: MovieCategory
     var movies: [HomeMovie]
 
     static func makePlaceholders(forCategory category: MovieCategory) -> HomeCategoryGroup {
         HomeCategoryGroup(
-            id: UUID().uuidString,
             status: .idle,
             category: category,
             movies: (0 ..< category.placeholderCount).map { _ in .placeholder }
+        )
+    }
+    
+    static func sample(forCategory category: MovieCategory) -> HomeCategoryGroup {
+        HomeCategoryGroup(
+            status: .completed,
+            category: category,
+            movies: [.sample, .sample, .sample, .sample, .sample, .sample]
         )
     }
 }

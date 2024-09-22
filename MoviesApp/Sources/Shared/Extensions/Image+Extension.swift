@@ -12,4 +12,7 @@ extension Image {
     static let magnifyingglass = Image(systemName: "magnifyingglass")
     static let bookmark = Image(systemName: "bookmark")
     static let gear = Image(systemName: "gear")
+    static let star = Image(systemName: "star")
+    static let calendar = Image(.calendar)
+    static let noResults = Image(.noResults)
 }

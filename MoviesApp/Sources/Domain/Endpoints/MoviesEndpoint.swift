@@ -9,6 +9,9 @@ import Foundation
 
 enum MoviesEndpoint: EndpointType {
     case getPopular(page: Int)
+    case getNowPlaying(page: Int)
+    case getUpcoming(page: Int)
+    case getTopRated(page: Int)
     
     var host: String { "https://api.themoviedb.org/3" }
     
@@ -22,12 +25,21 @@ enum MoviesEndpoint: EndpointType {
         switch self {
         case .getPopular:
             return "/movie/popular"
+        case .getNowPlaying:
+            return "/movie/now_playing"
+        case .getUpcoming:
+            return "/movie/upcoming"
+        case .getTopRated:
+            return "/movie/top_rated"
         }
     }
     
     var queryParams: [String: String]? {
         switch self {
-        case let .getPopular(page):
+        case let .getPopular(page),
+             let .getNowPlaying(page),
+             let .getUpcoming(page),
+             let .getTopRated(page):
             return ["page": "\(page)"]
         }
     }

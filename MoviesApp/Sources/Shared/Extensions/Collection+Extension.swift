@@ -11,6 +11,20 @@ extension Collection {
     subscript(safe index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
+
+    func unique<T: Hashable>(identifier: (Element) -> T) -> [Element] {
+        var set = Set<T>()
+        var uniqueList: [Element] = []
+
+        for element in self {
+            if !set.contains(identifier(element)) {
+                set.insert(identifier(element))
+                uniqueList.append(element)
+            }
+        }
+
+        return uniqueList
+    }
 }
 
 extension MutableCollection {

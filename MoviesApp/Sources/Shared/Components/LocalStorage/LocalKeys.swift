@@ -9,6 +9,7 @@ import Foundation
 
 struct LocalKeys {
     var debugMode: String { "debug_mode" }
+    var testKey: String { "test_key" }
 }
 
 extension LocalKeys {

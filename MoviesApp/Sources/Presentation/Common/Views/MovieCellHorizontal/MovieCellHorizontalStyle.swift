@@ -5,7 +5,7 @@
 //  Created by Leonardo on 9/22/24.
 //
 
-import Foundation
+import SwiftUI
 
 enum MovieCellHorizontalStyle {
     case detailed
@@ -17,6 +17,24 @@ enum MovieCellHorizontalStyle {
             return 1
         case .simple:
             return 2
+        }
+    }
+    
+    var titleFont: Font {
+        switch self {
+        case .detailed:
+            return .callout
+        case .simple:
+            return .title3
+        }
+    }
+    
+    var detailsFont: Font {
+        switch self {
+        case .detailed:
+            return .caption
+        case .simple:
+            return .body
         }
     }
     

@@ -47,7 +47,6 @@ final class HomeViewModel: ObservableObject {
 private extension HomeViewModel {
     func makeSectionsStructure() {
         guard sections.isEmpty else { return }
-        /// The **UI is driven by the structure of the sectionGroups**, order matters.
         let sectionGroups: [HomeSectionGroup] = [
             HomeSectionGroup(type: .principal, categories: [.popular]),
             HomeSectionGroup(type: .secondary, categories: [.nowPlaying, .upcoming, .topRated])

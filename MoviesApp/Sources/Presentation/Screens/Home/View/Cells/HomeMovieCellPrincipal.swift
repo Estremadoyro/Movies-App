@@ -45,6 +45,7 @@ private extension HomeMovieCellPrincipal {
                         .font(.principalMoviePosition)
                         .shadow(color: .dynamicWhite, radius: 2)
                         .offset(y: 24)
+                        .animation(.default, value: homeMovie.isPlaceholder)
                     Spacer()
                 }
                 .offset(x: -4)
@@ -58,8 +59,6 @@ private extension HomeMovieCellPrincipal {
         if let url = homeMovie.movie.posterURL {
             let config = RemoteImageConfig(size: imgSize)
             RemoteImage(url: url, config: config, imageAspect: .aspectFill)
-        } else {
-            RemoteImage.makeImageErrorView()
         }
     }
 }

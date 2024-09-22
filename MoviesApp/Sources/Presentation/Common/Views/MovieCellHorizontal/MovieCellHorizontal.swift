@@ -35,6 +35,7 @@ struct MovieCellHorizontal: View {
                         Spacer()
                     } else {
                         component.makeItem(movie: movie, style: style)
+                            .font(style.detailsFont)
                     }
                 }
             }

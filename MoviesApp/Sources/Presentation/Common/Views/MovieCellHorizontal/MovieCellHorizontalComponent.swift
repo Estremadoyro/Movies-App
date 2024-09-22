@@ -22,7 +22,7 @@ enum MovieCellHorizontalComponent: Int, CaseIterable {
                 Text(title)
                     .multilineTextAlignment(.leading)
                     .lineLimit(style.titleLineLimit)
-                    .font(.title3)
+                    .font(style.titleFont)
                     .bold()
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -46,11 +46,12 @@ enum MovieCellHorizontalComponent: Int, CaseIterable {
             }
         case .year:
             if let year = movie.dateYearOnly {
+                let side: CGFloat = style == .detailed ? 16 : 20
                 HStack(spacing: 4) {
                     Image.calendar
                         .resizable()
                         .renderingMode(.template)
-                        .frame(width: 24, height: 22)
+                        .frame(width: side * 1.1, height: side)
                     Text(year)
                 }
             }
@@ -58,9 +59,7 @@ enum MovieCellHorizontalComponent: Int, CaseIterable {
             if let runTime = movie.runtime {
                 HStack(spacing: 4) {
                     Image.clock
-                        .resizable()
                         .renderingMode(.template)
-                        .frame(width: 20, height: 20)
                     Text("\(runTime) minutes")
                 }
             }

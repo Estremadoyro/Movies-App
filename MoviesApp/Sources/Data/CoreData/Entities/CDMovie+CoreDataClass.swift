@@ -40,6 +40,8 @@ public class CDMovie: NSManagedObject {
         if let runtime {
             runtimeInt = runtime.intValue
         }
+        
+        let video = (try? video?.toModel(MovieVideo.self))
         return Movie(
             id: uniqueId,
             title: title,
@@ -50,7 +52,7 @@ public class CDMovie: NSManagedObject {
             overview: overview,
             runtime: runtimeInt,
             genres: try? genres?.toModel([MovieGenre].self),
-            videos: try? video?.toModel([MovieVideo].self)
+            videos: [video].compactMap { $0 }
         )
     }
 }

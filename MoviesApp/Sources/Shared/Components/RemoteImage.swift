@@ -53,34 +53,45 @@ struct RemoteImage: View {
     }
 
     var body: some View {
-        AsyncImage(
-            url: url,
-            transaction: Transaction(animation: .easeIn)
-        ) { (phase) in
-            switch phase {
-            case let .success(image):
-                onImageReceived(image)
-            case .empty:
-                onImagePlaceholder()
-            default:
+        Group {
+            if let url {
+                AsyncImage(
+                    url: url,
+                    transaction: Transaction(animation: .easeIn)
+                ) { (phase) in
+                    switch phase {
+                    case let .success(image):
+                        onImageReceived(image)
+                    case .empty:
+                        onImagePlaceholder()
+                    default:
+                        onImageError()
+                    }
+                }
+            } else {
                 onImageError()
             }
         }
         .frame(width: config.size.width, height: config.size.height)
     }
 
-     static func makeImageErrorView() -> some View {
-         ZStack {
-             Color.gray
-             VStack(spacing: 8) {
-                 Text("Error :(")
-                     .foregroundStyle(.white)
-                 Text("🖼️")
-             }
-             .bold()
-         }
+    static func makeImageErrorView() -> some View {
+        ZStack {
+            Color.gray.opacity(0.6)
+            VStack(spacing: 8) {
+                Image.photo
+                    .renderingMode(.template)
+                    .foregroundStyle(.white)
+                    .font(.system(size: 28))
+                Text("No Image")
+                    .font(.caption)
+                    .foregroundStyle(.white)
+            }
+            .bold()
+        }
+        .addBorder(color: .gray, width: 4, radius: 16)
     }
-    
+
     static func makePlaceholderView() -> some View {
         Color.gray
     }
@@ -88,7 +99,7 @@ struct RemoteImage: View {
 
 #Preview {
     RemoteImage(
-        url: URL(string: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"),
+        url: URL(string: "XD https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"),
         config: .default,
         imageAspect: .aspectFill
     )

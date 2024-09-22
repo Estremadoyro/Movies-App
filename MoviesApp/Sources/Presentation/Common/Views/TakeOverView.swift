@@ -8,25 +8,29 @@
 import SwiftUI
 
 
-struct NoResultsView: View {
-    var style: NoResultsStyle
+struct TakeOverView: View {
+    var style: TakeOverViewStyle
     
     var body: some View {
         VStack(spacing: 16) {
             Image.noResults
                 .resizable()
                 .frame(width: 80, height: 80)
-            Text("We Are Sorry, We Can\nNot Find The Movie :(")
+            Text(style.title)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .font(.title2)
                 .bold()
+                .fixedSize(horizontal: false, vertical: false)
             Text(style.subtitle)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.gray)
                 .font(.callout)
         }
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    NoResultsView(style: .homeFilter)
+    TakeOverView(style: .start)
 }

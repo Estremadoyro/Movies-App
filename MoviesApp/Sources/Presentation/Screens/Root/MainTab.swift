@@ -47,7 +47,7 @@ enum MainTab: Int, Identifiable, Hashable, CaseIterable {
         case .home:
             HomeViewBuilder.build()
         case .search:
-            Text("Search")
+            SearchViewBuilder.build()
         case .watchList:
             Text("watch liset")
         case .settings:

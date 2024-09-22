@@ -25,7 +25,7 @@ struct Movie: Identifiable, Hashable {
     static var sample: Movie {
         Movie(
             id: UUID().uuidString,
-            title: "Spiderman",
+            title: "Spiderman long title spiderman owo",
             posterPath: "/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
             voteAverage: 7.5,
             releaseDate: "2020-03-22"

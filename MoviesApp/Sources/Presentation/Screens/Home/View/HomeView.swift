@@ -40,7 +40,7 @@ private extension HomeView {
     func makeSearchView() -> some View {
         ZStack {
             Color.dynamicWhite
-                .opacity(0.7)
+                .opacity(0.8)
                 .ignoresSafeArea()
             ScrollView(.vertical) {
                 LazyVStack {
@@ -54,7 +54,7 @@ private extension HomeView {
             }
         }
         .frame(width: screenSize.width)
-        .overlay(viewModel.visibleMovies.isEmpty ? NoResultsView(style: .homeFilter) : nil)
+        .overlay(viewModel.visibleMovies.isEmpty ? TakeOverView(style: .empty(.homeFilter)) : nil)
         .animation(.default, value: viewModel.visibleMovies.map(\.id))
     }
 }

@@ -19,7 +19,7 @@ struct MoviesRemoteRepositoryMock: MoviesRemoteRepositoryProtocol {
             }
             promise(.success(model))
         }
-        .delay(for: 1, scheduler: RunLoop.main)
+        .delay(for: .seconds(getDelay(byEndpoint: endpoint)), scheduler: RunLoop.main)
         .eraseToAnyPublisher()
     }
 
@@ -33,6 +33,17 @@ struct MoviesRemoteRepositoryMock: MoviesRemoteRepositoryProtocol {
             return "movies-upcoming"
         case .getTopRated:
             return "movies-top-rated"
+        case .search:
+            return "movies-search"
+        }
+    }
+
+    private func getDelay(byEndpoint endpoint: MoviesEndpoint) -> Double {
+        switch endpoint {
+        case .search:
+            return 2
+        default:
+            return 0.5
         }
     }
 }

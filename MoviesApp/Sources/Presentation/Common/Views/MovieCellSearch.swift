@@ -25,12 +25,15 @@ struct MovieCellSearch: View {
     func makeContentView() -> some View {
         HStack(spacing: 16) {
             makeImageView()
-            VStack(alignment: .leading, spacing: 20) {
+                .frame(width: imgSize.width, height: imgSize.height)
+                .addCornerRadius(radius: 16)
+            VStack(alignment: .leading, spacing: .zero) {
                 if let title = movie.title {
                     Text(title)
-                        .lineLimit(1)
+                        .lineLimit(2)
                         .font(.title3)
                         .bold()
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer()
                 VStack(alignment: .leading, spacing: 8) {
@@ -54,7 +57,7 @@ struct MovieCellSearch: View {
                     }
                 }
             }
-            .padding(.vertical, 16)
+            .padding(.vertical, 4)
             Spacer()
         }
     }
@@ -67,8 +70,8 @@ struct MovieCellSearch: View {
                 config: .default,
                 imageAspect: .aspectFill
             )
-            .frame(width: imgSize.width, height: imgSize.height)
-            .addCornerRadius(radius: 16)
+        } else {
+            RemoteImage.makeImageErrorView()
         }
     }
 }

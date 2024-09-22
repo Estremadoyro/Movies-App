@@ -10,7 +10,7 @@ import Foundation
 struct HomeViewBuilder {
     static func build(mock: Bool = false) -> HomeView {
         @LocalStorage(\.debugMode) var debugMode: Bool?
-        let useMock: Bool = debugMode ?? mock
+        let useMock: Bool = mock ? mock : debugMode ?? mock
 
         let moviesRepository: MoviesRemoteRepositoryProtocol = useMock
             ? MoviesRemoteRepositoryMock()

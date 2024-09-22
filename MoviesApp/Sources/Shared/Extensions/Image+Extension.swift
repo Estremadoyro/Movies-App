@@ -15,4 +15,5 @@ extension Image {
     static let star = Image(systemName: "star")
     static let calendar = Image(.calendar)
     static let noResults = Image(.noResults)
+    static let photo = Image(systemName: "photo")
 }
